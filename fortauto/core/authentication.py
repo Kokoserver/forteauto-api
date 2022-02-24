@@ -5,7 +5,7 @@ import fortauto.conf.config as base_config
 from fortauto.api.user import user_model
 
 Oauth_schema = OAuth2PasswordBearer(
-    tokenUrl=f"{base_config.settings.api_url}/auth/login")
+    tokenUrl=f"{base_config.settings.api_prefix}/auth/login")
 
 
 class UserAuth:

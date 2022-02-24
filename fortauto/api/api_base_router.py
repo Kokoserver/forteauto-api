@@ -4,12 +4,12 @@ from fortauto.api.user.auth import user_auth_router
 from fortauto.api.user.property import user_property_router
 from fortauto.api.user.address import user_address_router
 from fortauto.api.payment import payment_router
-
+from fortauto.conf import config as base_config
 # from fortauto.api.service.category.service_category_router import category_router
 from fortauto.api.service.listing import service_listing_router
 from fortauto.api.service import service_router
 
-base_router = fastapi.APIRouter(prefix="/api/v1")
+base_router = fastapi.APIRouter(prefix=base_config.settings.api_prefix)
 base_router.include_router(
     router=user_router.router, prefix="/users", tags=["Users Account"])
 base_router.include_router(
