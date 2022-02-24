@@ -1,8 +1,9 @@
 import os
+from posixpath import split
 from typing import List, Union, Dict
 import random
 import string  # define the random 
-
+from pathlib import Path
 
 # def route_prefix(url_prefixName):
 #     return f"{API_URL}/{url_prefixName}"
@@ -37,9 +38,10 @@ def run_once(f):
     return wrapper
 
 
+
+
 def get_base_dir():
-    current_wdr = os.getcwd()
-    if os.path.isdir(os.path.join(current_wdr, os.getcwd().split("\\")[-1])):
-        return os.path.join(current_wdr, os.getcwd().split("\\")[-1])
-    return os.getcwd()
+    if  Path.is_dir(Path.joinpath(Path(__file__).cwd(), str(Path(__file__).cwd()).split("\\")[-1])):
+        return Path.joinpath(Path(__file__).cwd(), str(Path(__file__).cwd()).split("\\")[-1])
+    return Path(__file__).cwd()
 
