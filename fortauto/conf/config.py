@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 from functools import lru_cache
 from typing import Union
 import pydantic
@@ -18,9 +18,9 @@ class Settings(pydantic.BaseSettings):
     access_token_expire_time: int 
     jwt_algorithm: str 
     database_url: str
-    base_dir: pydantic.DirectoryPath = shortcuts.get_base_dir()
+    base_dir: pydantic.DirectoryPath = Path(shortcuts.get_base_dir())
     # locate template folder at the root of the project
-    template_folder: pydantic.DirectoryPath = f"{base_dir}/templates"
+    template_folder: pydantic.DirectoryPath = Path.joinpath(base_dir, "templates")
 
     # FLUTTERWAVE KEYS
     rave_public_key: str

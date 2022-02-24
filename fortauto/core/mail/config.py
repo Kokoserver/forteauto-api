@@ -1,13 +1,13 @@
 import os
+from pathlib import Path
 from functools import lru_cache
 import pydantic
 
 
 def get_base_dir():
-    current_wdr = os.getcwd()
-    if os.path.isdir(os.path.join(current_wdr, os.getcwd().split("\\")[-1])):
-        return os.path.join(current_wdr, os.getcwd().split("\\")[-1])
-    return os.getcwd()
+    if  Path.is_dir(Path.joinpath(Path(__file__).cwd(), str(Path(__file__).cwd()).split("\\")[-1])):
+        return Path.joinpath(Path(__file__).cwd(), str(Path(__file__).cwd()).split("\\")[-1])
+    return Path(__file__).cwd()
 
 
 class Settings(pydantic.BaseSettings):
@@ -17,9 +17,9 @@ class Settings(pydantic.BaseSettings):
     admin_email: pydantic.EmailStr = os.getenv("ADMIN_EMAIL")
     admin_password: str = os.getenv("ADMIN_PASSWORD")
     website_name: str = os.getenv("WEBSITE_NAME", "kokoserver")
-    base_dir: pydantic.DirectoryPath = get_base_dir()
+    base_dir: pydantic.DirectoryPath = Path(get_base_dir())
     # locate template folder at the root of the project
-    template_folder: pydantic.DirectoryPath = f"{base_dir}/templates"
+    template_folder: pydantic.DirectoryPath = Path.joinpath(base_dir, "templates")
 
     class Config:
         env_file = "./.env"
