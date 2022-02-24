@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "fortauto"
+version = "0.1.0"
+description = ""
+authors = ["Kokoserver <owonikokoolaluwa@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = {extras = ["all"], version = "^0.74.0"}
+ormar = {extras = ["postgresql"], version = "^0.10.24"}
+python-dotenv = "^0.19.2"
+pytest = "^7.0.1"
+psycopg2 = "^2.9.3"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+rave-python = "^1.2.15"
+alembic = "^1.7.6"
+
+[tool.poetry.dev-dependencies]
+yapf = "^0.32.0"
+
+[tool.poetry.scripts]
+server = "fortauto.server:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
