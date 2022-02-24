@@ -37,9 +37,6 @@ def run_once(f):
 
 
 
-
 def get_base_dir():
-    if  Path.is_dir(Path.joinpath(Path(__file__).cwd(), str(Path(__file__).cwd()).split("\\")[-1])):
-        return Path.joinpath(Path(__file__).cwd(), str(Path(__file__).cwd()).split("\\")[-1])
-    return Path(__file__).cwd()
+    return Path(__file__).resolve(strict=True).cwd() 
 
