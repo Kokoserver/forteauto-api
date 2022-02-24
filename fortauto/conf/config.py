@@ -12,7 +12,6 @@ class Settings(pydantic.BaseSettings):
     secret_key: str = os.getenv("SECRET_KEY")
     refresh_key: str = os.getenv("refresh_key")
     website_name: str = "forte automobile"
-    postgres_password: str = os.getenv("POSTGRES_PASSWORD")
     api_prefix_url:str = "/api/v1"
     api_version: Union[int, float] = os.getenv("API_VERSION")
     refresh_token_expire_time: int = os.getenv("REFRESH_TOKEN_EXPIRE_TIME")
