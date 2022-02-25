@@ -17,7 +17,11 @@ class Settings(pydantic.BaseSettings):
     refresh_token_expire_time: int
     access_token_expire_time: int
     jwt_algorithm: str
-    database_url: str
+    database_name: str
+    database_username: str
+    database_password: str
+    database_port: int
+    database_host: str
     base_dir: pydantic.DirectoryPath = shortcuts.get_base_dir()
     # locate template folder at the root of the project
     template_folder: pydantic.DirectoryPath = Path.joinpath(

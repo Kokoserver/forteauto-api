@@ -5,9 +5,10 @@ from forteauto.conf import config as base_config
 
 
 def get_db_url():
+    database_url = f"postgresql://{base_config.settings.database_username}:{base_config.settings.database_password}@{base_config.settings.database_host}:{base_config.settings.database_port}/{base_config.settings.database_name}"
     if base_config.settings.environment == "test" or "testing":
-        return f"{base_config.settings.database_url}_test"
-    return base_config.settings.database_url
+        return f"{database_url}_test"
+    return database_url
 
 
 database_url = get_db_url()
