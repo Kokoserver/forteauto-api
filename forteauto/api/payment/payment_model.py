@@ -3,10 +3,10 @@ from enum import Enum
 from datetime import datetime
 from typing import Optional
 import ormar
-from api.user import user_model
-from database import document
-from api.service import service_model
-from utils import shortcuts
+from forteauto.api.user import user_model
+from forteauto.database import document
+from forteauto.api.service import service_model
+from forteauto.utils import shortcuts
 
 
 class Payment_status(str, Enum):

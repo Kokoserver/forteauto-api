@@ -1,9 +1,9 @@
 from fastapi import FastAPI, status, responses
 # from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.middleware import cors
-from conf import config as base_config
-from database import database_dependencies as db_deps
-from api import api_base_router as base_router_v1
+from forteauto.conf import config as base_config
+from forteauto.database import database_dependencies as db_deps
+from forteauto.api import api_base_router as base_router_v1
 
 app = FastAPI(
     debug=base_config.settings.debug,
@@ -12,20 +12,17 @@ app = FastAPI(
 app.state.database = db_deps.database
 app.include_router(router=base_router_v1.base_router)
 
+@app.on_event("startup")
+async def startup():
+    await db_deps.connect_datatase(app=app)
+    if base_config.settings.debug:
+        print("database connected")
 
-# @app.on_event("startup")
-# async def startup():
-#     await db_deps.connect_datatase(app=app)
-#     # if base_config.settings.debug:
-#     print("database connected")
-
-
-# @app.on_event("shutdown")
-# async def shutdown():
-#     await db_deps.disconnect_datatase(app=app)
-#     # if base_config.settings.debug:
-#     print("database disconnected")
-
+@app.on_event("shutdown")
+async def shutdown():
+    await db_deps.disconnect_datatase(app=app)
+    if base_config.settings.debug:
+        print("database disconnected")
 
 origins = [
     "http://localhost:3000",

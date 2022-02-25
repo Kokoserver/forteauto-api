@@ -1,8 +1,8 @@
 from decimal import Decimal
 from datetime import datetime
 import ormar
-from api.user import user_model
-from database import document
+from forteauto.api.user import user_model
+from forteauto.database import document
 
 
 class Wallet(document.Model):

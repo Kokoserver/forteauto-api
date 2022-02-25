@@ -1,7 +1,7 @@
 from typing import Optional
 import ormar
-from database import document
-from api.user import user_model
+from forteauto.database import document
+from forteauto.api.user import user_model
 
 
 class Car(document.Model):

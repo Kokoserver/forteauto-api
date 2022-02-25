@@ -1,6 +1,6 @@
 from datetime import datetime
 from textwrap import indent
-from database.document import Model, ormar, BaseMeta
+from forteauto.database.document import Model, ormar, BaseMeta
 
 
 class ServiceCategory(Model):

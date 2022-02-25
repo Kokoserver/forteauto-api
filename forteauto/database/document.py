@@ -1,5 +1,5 @@
 import ormar
-from database import database_dependencies as db_deps
+from forteauto.database import database_dependencies as db_deps
 
 
 class BaseMeta(ormar.ModelMeta):
@@ -11,4 +11,5 @@ class Model(ormar.Model):
 
     class Meta(BaseMeta):
         abstract = True
+
     id: int = ormar.Integer(primary_key=True, index=True, nullable=True)

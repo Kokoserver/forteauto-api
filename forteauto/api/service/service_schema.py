@@ -1,8 +1,8 @@
 from pydantic import BaseModel
 from typing import Optional, Union
-from api.service.listing.service_listing_schema import Service_typeOutput
-from api.service.service_model import Service_status
-from api.user.property.user_property_schema import Car_details_Optional
+from forteauto.api.service.listing.service_listing_schema import Service_typeOutput
+from forteauto.api.service.service_model import Service_status
+from forteauto.api.user.property.user_property_schema import Car_details_Optional
 
 
 class service_typeInput(BaseModel):

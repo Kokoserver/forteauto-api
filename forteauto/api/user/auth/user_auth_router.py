@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, status, HTTPException
-from api.user import user_model
-from api.user.auth import user_auth_schema
-from core import jwt_anth
-from core import authentication
+from forteauto.api.user import user_model
+from forteauto.api.user.auth import user_auth_schema
+from forteauto.core import jwt_anth
+from forteauto.core import authentication
 
 router = APIRouter()
 

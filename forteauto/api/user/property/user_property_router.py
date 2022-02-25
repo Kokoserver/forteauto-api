@@ -1,9 +1,9 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-from core.authentication import UserWrite
-from api.user.property import user_property_model
-from api.user.property import user_property_schema
-from api.user import user_model
+from forteauto.core.authentication import UserWrite
+from forteauto.api.user.property import user_property_model
+from forteauto.api.user.property import user_property_schema
+from forteauto.api.user import user_model
 
 router = APIRouter()
 
@@ -14,8 +14,7 @@ router = APIRouter()
     status_code=status.HTTP_201_CREATED,
     response_model=user_property_schema.CarDetailResponse)
 async def add_new_user_car(new_car_data: user_property_schema.CarDetail,
-                           user:int = Depends(
-                               UserWrite.current_user)):
+                           user: int = Depends(UserWrite.current_user)):
     check_car = await user_property_model.Car.objects.get_or_none(
         vin_number=new_car_data.vin_number)
     if check_car:
@@ -32,7 +31,7 @@ async def add_new_user_car(new_car_data: user_property_schema.CarDetail,
     "/",
     status_code=status.HTTP_200_OK,
     response_model=List[user_property_schema.CarDetailResponse])
-async def all_ser_car(user:int = Depends(UserWrite.current_user)):
+async def all_ser_car(user: int = Depends(UserWrite.current_user)):
     all_user_cars_obj = await user_property_model.Car.objects.filter(owner=user
                                                                     ).all()
     if all_user_cars_obj:
@@ -45,8 +44,7 @@ async def all_ser_car(user:int = Depends(UserWrite.current_user)):
     status_code=status.HTTP_200_OK,
     response_model=user_property_schema.CarDetailResponse)
 async def get_single_user_car(car_id: int,
-                              user:int = Depends(
-                                  UserWrite.current_user)):
+                              user: int = Depends(UserWrite.current_user)):
     car_obj = await user_property_model.Car.objects.get_or_none(
         id=car_id, owner=user)
     if car_obj:
@@ -62,8 +60,7 @@ async def get_single_user_car(car_id: int,
     response_model=user_property_schema.CarDetailResponse)
 async def update_single_user_car(car_id: int,
                                  car_data: user_property_schema.CarDetail,
-                                 user:int = Depends(
-                                     UserWrite.current_user)):
+                                 user: int = Depends(UserWrite.current_user)):
     check_car_obj: user_property_model.Car = await user_property_model.Car.objects.get_or_none(
         id=car_id, owner=user)
     if check_car_obj:
@@ -77,8 +74,7 @@ async def update_single_user_car(car_id: int,
 
 @router.delete("/{car_id}")
 async def remove_single_user_car(car_id: int,
-                                 user:int = Depends(
-                                     UserWrite.current_user)):
+                                 user: int = Depends(UserWrite.current_user)):
     car_obj = await user_property_model.Car.objects.get_or_none(
         id=car_id, owner=user)
     if car_obj:

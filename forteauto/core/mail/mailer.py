@@ -5,9 +5,9 @@ from email.mime import multipart, text
 from email.utils import formataddr
 from typing import Optional, List, Union
 import pydantic
-from core.mail import config as base_config
-from core.mail import exception
-from core.mail import template_finder
+from forteauto.core.mail import config as base_config
+from forteauto.core.mail import exception
+from forteauto.core.mail import template_finder
 
 
 class Mailer(template_finder.Mail_Template):

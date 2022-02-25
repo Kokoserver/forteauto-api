@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-from api.user.address import user_address_model
-from api.user.address import user_address_schema
-from core.authentication import UserWrite
+from forteauto.api.user.address import user_address_model
+from forteauto.api.user.address import user_address_schema
+from forteauto.core.authentication import UserWrite
 
 router = APIRouter()
 

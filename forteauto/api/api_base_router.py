@@ -1,13 +1,13 @@
 import fastapi
-from api.user import user_router
-from api.user.auth import user_auth_router
-from api.user.property import user_property_router
-from api.user.address import user_address_router
-from api.payment import payment_router
-from conf import config as base_config
+from forteauto.api.user import user_router
+from forteauto.api.user.auth import user_auth_router
+from forteauto.api.user.property import user_property_router
+from forteauto.api.user.address import user_address_router
+from forteauto.api.payment import payment_router
+from forteauto.conf import config as base_config
 # api.service.category.service_category_router import category_router
-from api.service.listing import service_listing_router
-from api.service import service_router
+from forteauto.api.service.listing import service_listing_router
+from forteauto.api.service import service_router
 
 base_router = fastapi.APIRouter(prefix=base_config.settings.api_prefix)
 base_router.include_router(

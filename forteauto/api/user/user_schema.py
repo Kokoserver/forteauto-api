@@ -1,7 +1,7 @@
 import re
 import pydantic
 from typing import List, Optional
-from api.user.address import user_address_schema
+from forteauto.api.user.address import user_address_schema
 
 import pydantic
 

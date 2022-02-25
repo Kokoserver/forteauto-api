@@ -1,5 +1,5 @@
 from decimal import Decimal
-from database.document import Model, ormar, BaseMeta
+from forteauto.database.document import Model, ormar, BaseMeta
 from datetime import datetime
 
 

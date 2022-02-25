@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import databases
 import sqlalchemy
-from conf import config as base_config
+from forteauto.conf import config as base_config
 
 
 def get_db_url():
@@ -15,6 +15,7 @@ database_url = get_db_url()
 database = databases.Database(database_url)
 metadata = sqlalchemy.MetaData(database)
 engine = sqlalchemy.create_engine(database_url)
+
 
 async def connect_datatase(app: FastAPI) -> None:
     metadata.create_all(engine)

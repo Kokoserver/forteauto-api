@@ -13,7 +13,8 @@
                 "**/Thumbs.db": true,
                 "**/__pycache__": true,
                 "**/__pytest__cache": true,
-                "**.pytest_cache":true
+                "**.pytest_cache":true,
+                "**.idea":true
         },
          "python.formatting.yapfPath": "yapf",
         "python.linting.enabled": true

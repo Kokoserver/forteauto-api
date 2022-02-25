@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
-from api.payment import payment_model
-from api.payment import payment_schema
-from core.authentication import UserWrite
-from api.service import service_model
-from api.user.address import user_address_model
-from api import api_base_schema as base_schema
-from core.payment import rave_payement
-from core.payment import rave_payment_schema
-from api.payment import payment_schema
-from utils import shortcuts
+from forteauto.api.payment import payment_model
+from forteauto.api.payment import payment_schema
+from forteauto.core.authentication import UserWrite
+from forteauto.api.service import service_model
+from forteauto.api.user.address import user_address_model
+from forteauto.api import api_base_schema as base_schema
+from forteauto.core.payment import rave_payement
+from forteauto.core.payment import rave_payment_schema
+from forteauto.api.payment import payment_schema
+from forteauto.utils import shortcuts
 
 router = APIRouter()
 

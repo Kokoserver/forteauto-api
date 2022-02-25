@@ -1,8 +1,8 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import jose
-import conf.config as base_config
-from api.user import user_model
+from forteauto.conf import config as base_config
+from forteauto.api.user import user_model
 
 Oauth_schema = OAuth2PasswordBearer(
     tokenUrl=f"{base_config.settings.api_prefix}/auth/login")
@@ -18,13 +18,13 @@ class UserAuth:
             headers={"WWW-Authenticate": "Bearer"},
         )
         try:
-            payload:dict = jose.jwt.decode(
+            payload: dict = jose.jwt.decode(
                 token=token,
                 key=base_config.settings.secret_key,
                 algorithms=[base_config.settings.jwt_algorithm],
             )
             user: dict = payload.get("data", None)
-            
+
             if user is None:
                 raise credentials_exception
             if not user.get("id", None) and not user.get("role", None):
@@ -37,7 +37,7 @@ class UserAuth:
 class UserWrite:
 
     @staticmethod
-    def is_admin(user:dict = Depends(UserAuth.authenticate)):
+    def is_admin(user: dict = Depends(UserAuth.authenticate)):
         if user.get("role") == user_model.UserRole.admin:
             return user.get("id")
         raise HTTPException(
@@ -46,16 +46,8 @@ class UserWrite:
         )
 
     @staticmethod
-    def is_supper_admin(user:dict = Depends(UserAuth.authenticate)):
+    def is_supper_admin(user: dict = Depends(UserAuth.authenticate)):
         if user.get("role") == user_model.UserRole.super_admin:
-            return user.get("id")
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Only super admin can perform this operation",
-        )
-    @staticmethod
-    def super_or_admin(user:dict = Depends(UserAuth.authenticate)):
-        if user.get("role") == user_model.UserRole.super_admin or user.get("role") == user_model.UserRole.admin:
             return user.get("id")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -63,7 +55,17 @@ class UserWrite:
         )
 
     @staticmethod
-    def current_user(user:dict = Depends(UserAuth.authenticate)):
+    def super_or_admin(user: dict = Depends(UserAuth.authenticate)):
+        if user.get("role") == user_model.UserRole.super_admin or user.get(
+                "role") == user_model.UserRole.admin:
+            return user.get("id")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Only super admin can perform this operation",
+        )
+
+    @staticmethod
+    def current_user(user: dict = Depends(UserAuth.authenticate)):
         if user.get("is_active", None):
             return user.get("id", False)
         raise HTTPException(

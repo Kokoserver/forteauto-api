@@ -1,13 +1,13 @@
 from typing import List, Optional, Union
 from fastapi import APIRouter, Depends, status, HTTPException, Response
 import ormar
-from api.api_base_schema import Message
-from api.service.listing.service_listing_model import Service_type
-from api.user.property.user_property_model import Car
-from api.user.user_model import User
-from api.service.service_model import Service, Service_status
-from api.service.service_schema import ServiceInput, ServiceOutput, ServiceUpdate
-from core.authentication import UserWrite
+from forteauto.api.api_base_schema import Message
+from forteauto.api.service.listing.service_listing_model import Service_type
+from forteauto.api.user.property.user_property_model import Car
+from forteauto.api.user.user_model import User
+from forteauto.api.service.service_model import Service, Service_status
+from forteauto.api.service.service_schema import ServiceInput, ServiceOutput, ServiceUpdate
+from forteauto.core.authentication import UserWrite
 
 router = APIRouter()
 
@@ -15,7 +15,7 @@ router = APIRouter()
 @router.post(
     "/", status_code=status.HTTP_201_CREATED, response_model=ServiceOutput)
 async def create_service(new_service_data: ServiceInput,
-                         user:int = Depends(UserWrite.current_user)):
+                         user: int = Depends(UserWrite.current_user)):
     # try:
     get_service_type: Service_type = await Service_type.objects.get_or_none(
         id=new_service_data.service_type)
@@ -51,8 +51,9 @@ async def create_service(new_service_data: ServiceInput,
     response_model=ServiceOutput)
 async def update_service(service_id: int,
                          service_data: ServiceUpdate,
-                         user:int = Depends(UserWrite.current_user)):
-    get_service: Service = await Service.objects.get_or_none(id=service_id, owner=user)
+                         user: int = Depends(UserWrite.current_user)):
+    get_service: Service = await Service.objects.get_or_none(
+        id=service_id, owner=user)
     if not get_service:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -93,7 +94,7 @@ async def update_service(service_id: int,
 
 @router.get(
     "/", status_code=status.HTTP_200_OK, response_model=List[ServiceOutput])
-async def get_service_list(user:int = Depends(UserWrite.current_user),
+async def get_service_list(user: int = Depends(UserWrite.current_user),
                            limit: Optional[int] = 10,
                            skip: Optional[int] = 0):
     all_user_services = await Service.objects.select_related(
@@ -109,7 +110,7 @@ async def get_service_list(user:int = Depends(UserWrite.current_user),
     status_code=status.HTTP_200_OK,
     response_model=ServiceOutput)
 async def get_service_list(service_id: int,
-                           user:int = Depends(UserWrite.current_user)):
+                           user: int = Depends(UserWrite.current_user)):
     service_obj: Service = await Service.objects.select_related(
         ["service_type", "car_type"]).get_or_none(
             id=service_id, owner=user)
@@ -122,7 +123,7 @@ async def get_service_list(service_id: int,
 
 @router.delete("/{service_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_service(service_id: int,
-                         user:int = Depends(UserWrite.current_user)):
+                         user: int = Depends(UserWrite.current_user)):
     service_obj = await Service.objects.get_or_none(id=service_id, owner=user)
     if service_obj:
         await service_obj.delete()

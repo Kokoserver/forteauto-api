@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 import jose
 from jose import JWTError
 from jose import jwt
-import conf.config as base_config
+from  forteauto.conf import config as base_config
 
 
 class JWTAUTH:
@@ -55,8 +55,8 @@ class JWTAUTH:
         if seconds > 0:
             exp = datetime.utcnow() + timedelta(seconds=int(seconds))
 
-        if exp is not None: 
-            data_to_encode = {"data":data, "exp":exp}
+        if exp is not None:
+            data_to_encode = {"data": data, "exp": exp}
         else:
             data_to_encode = {"data": data}
 
@@ -64,8 +64,8 @@ class JWTAUTH:
 
             encoded_data = jwt.encode(
                 claims=data_to_encode,
-                key=secret_key if secret_key else
-                base_config.settings.refresh_key,
+                key=secret_key
+                if secret_key else base_config.settings.refresh_key,
                 algorithm=base_config.settings.jwt_algorithm,
             )
 
@@ -82,8 +82,8 @@ class JWTAUTH:
         try:
             payload = jwt.decode(
                 token=encoded_data,
-                key=secret_key if secret_key else
-                base_config.settings.refresh_key,
+                key=secret_key
+                if secret_key else base_config.settings.refresh_key,
                 algorithms=base_config.settings.jwt_algorithm,
             )
             data: dict = payload.get("data")

@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from functools import lru_cache
 import pydantic
-from utils import shortcuts
+from forteauto.utils import shortcuts
 
 
 class Settings(pydantic.BaseSettings):
@@ -14,8 +14,8 @@ class Settings(pydantic.BaseSettings):
     website_name: str = os.getenv("WEBSITE_NAME", "kokoserver")
     base_dir: pydantic.DirectoryPath = shortcuts.get_base_dir()
     # locate template folder at the root of the project
-    template_folder: pydantic.DirectoryPath = Path.joinpath(base_dir, "templates")
-
+    template_folder: pydantic.DirectoryPath = Path.joinpath(
+        base_dir, "templates")
 
     class Config:
         env_file = "./.env"
@@ -27,4 +27,3 @@ def get_settings():
 
 
 settings = get_settings()
-

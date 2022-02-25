@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Optional
 import pydantic
-from api.service.listing import service_listing_schema
-from api.user.property import user_property_schema
+from forteauto.api.service.listing import service_listing_schema
+from forteauto.api.user.property import user_property_schema
 
 
 class PaymentInput(pydantic.BaseModel):
@@ -28,11 +28,11 @@ class PaymentInput(pydantic.BaseModel):
         max_length=4)
     schema_extra = {
         "card_example": {
-        "cardno": "5531886652142950",
-        "cvv": "564",
-        "expiry_month": "09",
-        "expiry_year": "32",
-        "pin": "3310"
+            "cardno": "5531886652142950",
+            "cvv": "564",
+            "expiry_month": "09",
+            "expiry_year": "32",
+            "pin": "3310"
         }
     }
 
@@ -80,17 +80,12 @@ class RefundInput(pydantic.BaseModel):
 
 
 class ValidatedPaymentInput(Base_types):
-    otp: str 
-    schema_extra = {
-        "example": {
-        "otp": "12345"
-        }
-    }
+    otp: str
+    schema_extra = {"example": {"otp": "12345"}}
 
 
 class ValidatePaymet_Input(ValidatedPaymentInput):
     payment_Id: Optional[str]
-
 
 
 class Payment_Update_Input(Base_types):

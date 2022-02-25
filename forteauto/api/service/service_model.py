@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import Optional
-from database.document import BaseMeta, Model, ormar
-from api.user.property.user_property_model import Car
-from api.user.user_model import User
-from api.service.listing.service_listing_model import Service_type
-from utils.shortcuts import random_str
+from forteauto.database.document import BaseMeta, Model, ormar
+from forteauto.api.user.property.user_property_model import Car
+from forteauto.api.user.user_model import User
+from forteauto.api.service.listing.service_listing_model import Service_type
+from forteauto.utils.shortcuts import random_str
 
 
 class Service_status(str, Enum):

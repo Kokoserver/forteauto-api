@@ -1,8 +1,8 @@
 from typing import Union
 from fastapi import HTTPException, status
 from rave_python import Rave, RaveExceptions, Misc
-from conf import config as base_config
-from core.payment import rave_payment_schema as rpm
+from forteauto.conf import config as base_config
+from forteauto.core.payment import rave_payment_schema as rpm
 
 
 class MakePayent(object):
@@ -13,7 +13,6 @@ class MakePayent(object):
             secretKey=base_config.settings.rave_secret_key,
             usingEnv=False,
             production=self.__rave_production_check())
-
 
     def __rave_production_check(self):
         return False if base_config.settings.debug else True
@@ -93,9 +92,9 @@ class MakePayent(object):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST, detail=response_body)
 
-    def refund(self, flwRef:str, amount:float):
+    def refund(self, flwRef: str, amount: float):
         try:
-            response = self.rave.Card.refund(flwRef,amount)
+            response = self.rave.Card.refund(flwRef, amount)
             refund_data = rpm.Payment_Refund_output(**response)
             return refund_data
         except Exception as e:

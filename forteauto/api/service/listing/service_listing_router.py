@@ -1,9 +1,9 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 import ormar
-from core.authentication import UserWrite
-from api.service.listing.service_listing_model import Service_type
-from api.service.listing.service_listing_schema import Service_typeInput, Service_typeOutput
+from forteauto.core.authentication import UserWrite
+from forteauto.api.service.listing.service_listing_model import Service_type
+from forteauto.api.service.listing.service_listing_schema import Service_typeInput, Service_typeOutput
 
 router = APIRouter()
 
@@ -11,7 +11,7 @@ router = APIRouter()
 @router.post(
     "/", status_code=status.HTTP_201_CREATED, response_model=Service_typeOutput)
 async def create_service(new_service_type: Service_typeInput,
-                         user:int = Depends(UserWrite.super_or_admin)):
+                         user: int = Depends(UserWrite.super_or_admin)):
     check_service_type: Service_type = await Service_type.objects.filter(
         name=new_service_type.name).all()
     if not check_service_type:
@@ -61,7 +61,7 @@ async def get_single_service(service_type_id: int):
     response_model=Service_typeOutput)
 async def update_service(service_type_id: int,
                          service_type_data: Service_typeInput,
-                         user:int  = Depends(UserWrite.super_or_admin)):
+                         user: int = Depends(UserWrite.super_or_admin)):
     service_type_obj: Service_type = await Service_type.objects.get_or_none(
         id=service_type_id)
     if not service_type_obj:
@@ -75,7 +75,7 @@ async def update_service(service_type_id: int,
 
 @router.delete("/{service_type_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_service(service_type_id: int,
-                         user:int = Depends(UserWrite.super_or_admin)):
+                         user: int = Depends(UserWrite.super_or_admin)):
     service_type_obj: Service_type = await Service_type.objects.get_or_none(
         id=service_type_id)
     if service_type_obj:

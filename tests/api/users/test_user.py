@@ -1,8 +1,8 @@
 import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
-core.jwt_anth import JWTAUTH
-conf import config as base_config
+from forteauto.core.jwt_anth import JWTAUTH
+from forteauto.conf import config as base_config
 import time
 
 

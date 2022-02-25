@@ -1,14 +1,14 @@
 from re import U
 from fastapi import (APIRouter, Depends, Response, status, HTTPException,
                      BackgroundTasks)
-from core import password
-from core.mail import mailer
-from core import authentication as auths
-from core import jwt_anth
-from conf import config
-import api.api_base_schema as base_schema
-from api.user import user_model
-from api.user import user_schema
+from forteauto.core import password
+from forteauto.core.mail import mailer
+from forteauto.core import authentication as auths
+from forteauto.core import jwt_anth
+from forteauto.conf import config
+import forteauto.api.api_base_schema as base_schema
+from forteauto.api.user import user_model
+from forteauto.api.user import user_schema
 
 router = APIRouter()
 
@@ -58,7 +58,7 @@ async def user_regsiter(
     response_model=base_schema.Message)
 async def verify_user_email(
         user_token: user_schema.UserAccountVerifyToken) -> base_schema.Message:
-    data:dict = jwt_anth.JWTAUTH.data_decoder(encoded_data=user_token.token)
+    data: dict = jwt_anth.JWTAUTH.data_decoder(encoded_data=user_token.token)
 
     if data:
         user_obj: user_model.User = await user_model.User.objects.get_or_none(
@@ -142,10 +142,13 @@ async def update_user_password(
     "/me",
     status_code=status.HTTP_200_OK,
     response_model=user_schema.UserDataOut)
-async def current_user_data(user:int = Depends(auths.UserWrite.current_user)) -> user_schema.UserDataOut:
+async def current_user_data(user: int = Depends(
+    auths.UserWrite.current_user)) -> user_schema.UserDataOut:
     user_data = await user_model.User.objects.get_or_none(id=user)
     if not user_data:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User does nnot exist")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User does nnot exist")
     return user_data.dict()
 
 
@@ -165,9 +168,7 @@ async def current_user_data(user:int = Depends(auths.UserWrite.current_user)) ->
     response_model_exclude={"password"},
 )
 async def remove_user_data(
-    userId: int,
-    admin:int = Depends(auths.UserWrite.super_or_admin)
-) -> None:
+    userId: int, admin: int = Depends(auths.UserWrite.super_or_admin)) -> None:
     user_to_remove = await user_model.User.objects.get_or_none(id=userId)
     if user_to_remove:
         await user_to_remove.delete()

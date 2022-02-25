@@ -2,8 +2,8 @@ from enum import Enum
 from datetime import datetime
 import pydantic
 import ormar
-from core import password
-from database import document
+from forteauto.core import password
+from forteauto.database import document
 
 
 class UserRole(str, Enum):
