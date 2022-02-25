@@ -3,7 +3,7 @@ on: [push, pull_request]
 jobs:
   job1:
     run-on: ubuntu-lastest
-    staps:
+    steps:
       - name: git pull request
         uses: actions/checkout@v2
       - name: say hello to kokoserver
