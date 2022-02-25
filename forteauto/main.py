@@ -13,18 +13,18 @@ app.state.database = db_deps.database
 app.include_router(router=base_router_v1.base_router)
 
 
-@app.on_event("startup")
-async def startup():
-    await db_deps.connect_datatase(app=app)
-    # if base_config.settings.debug:
-    print("database connected")
+# @app.on_event("startup")
+# async def startup():
+#     await db_deps.connect_datatase(app=app)
+#     # if base_config.settings.debug:
+#     print("database connected")
 
 
-@app.on_event("shutdown")
-async def shutdown():
-    await db_deps.disconnect_datatase(app=app)
-    # if base_config.settings.debug:
-    print("database disconnected")
+# @app.on_event("shutdown")
+# async def shutdown():
+#     await db_deps.disconnect_datatase(app=app)
+#     # if base_config.settings.debug:
+#     print("database disconnected")
 
 
 origins = [
