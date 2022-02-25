@@ -1,1 +1,1 @@
-web: gunicorn -w 3 -k uvicorn.workers.UvicornWorker fortauto.main:app
+web: gunicorn -w 3 -k uvicorn.workers.UvicornWorker forteauto.main:app

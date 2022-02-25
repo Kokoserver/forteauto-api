@@ -1,10 +1,10 @@
 import asyncio
 import pytest
 import sqlalchemy
-from fortauto.main import app
-from fortauto.database import database_dependencies
+from forteauto.main import app
+from forteauto.database import database_dependencies
 from fastapi import testclient
-from fortauto.conf import config as base_config
+from forteauto.conf import config as base_config
 
 
 

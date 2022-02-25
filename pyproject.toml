@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "fortauto"
+name = "forteauto"
 version = "0.1.0"
 description = ""
 authors = ["Kokoserver <owonikokoolaluwa@gmail.com>"]
@@ -21,7 +21,7 @@ gunicorn = "^20.1.0"
 yapf = "^0.32.0"
 
 [tool.poetry.scripts]
-server = "fortauto.server:main"
+server = "forteauto.server:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
