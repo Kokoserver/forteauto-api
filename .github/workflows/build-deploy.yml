@@ -1,0 +1,11 @@
+name: Build and deploy code
+on: [push, pull_request]
+jobs:
+  job1:
+    run-on: ubuntu-lastest
+    staps:
+      - name: git pull request
+        uses: actions/checkout@v2
+      - name: say hello to kokoserver
+        run: echo " hello kokoserver"
+
