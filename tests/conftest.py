@@ -26,7 +26,7 @@ def event_loop():
 @pytest.fixture(scope="session")
 def client():
     client = testclient.TestClient(app=app)
-    client.base_url += base_config.settings.api_prefix_url  # adding prefix
+    client.base_url += base_config.settings.api_prefix  # adding prefix
     client.base_url = client.base_url.rstrip("/") + "/"
     yield client
 
