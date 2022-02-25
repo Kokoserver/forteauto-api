@@ -11,7 +11,7 @@ from forteauto.conf import config as base_config
 
 @pytest.fixture(autouse=True)
 def get_db():
-    engine = sqlalchemy.create_engine(f"{base_config.settings.database_url}_test")
+    engine = sqlalchemy.create_engine(database_dependencies.test_db_url)
     database_dependencies.metadata.drop_all(engine)
     database_dependencies.metadata.create_all(engine)
     yield

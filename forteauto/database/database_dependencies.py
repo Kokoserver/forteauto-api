@@ -3,15 +3,10 @@ import databases
 import sqlalchemy
 from forteauto.conf import config as base_config
 
+database_url = f"postgresql://{base_config.settings.database_username}:{base_config.settings.database_password}@{base_config.settings.database_host}:{base_config.settings.database_port}/{base_config.settings.database_name}"
 
-def get_db_url():
-    database_url = f"postgresql://{base_config.settings.database_username}:{base_config.settings.database_password}@{base_config.settings.database_host}:{base_config.settings.database_port}/{base_config.settings.database_name}"
-    if base_config.settings.environment == "test" or "testing":
-        return f"{database_url}_test"
-    return database_url
-
-
-database_url = get_db_url()
+test_db_url =  f"postgresql://{base_config.settings.database_username}:{base_config.settings.database_password}@{base_config.settings.database_host}:{base_config.settings.database_port}/{base_config.settings.database_name}_test"
+    
 
 database = databases.Database(database_url)
 metadata = sqlalchemy.MetaData(database)

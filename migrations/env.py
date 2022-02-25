@@ -15,7 +15,7 @@ config = context.config
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
-from forteauto.conf import config as api_config
+
 
 # add your model's MetaData object here (the one used in ormar)
 # for 'autogenerate' support
@@ -27,7 +27,7 @@ target_metadata = document.BaseMeta.metadata
 
 # set your url here or import from settings
 # note that by default url is in saved sqlachemy.url variable in alembic.ini file
-URL = database_dependencies.get_db_url()
+URL = database_dependencies.database_url
 
 
 def run_migrations_offline():
