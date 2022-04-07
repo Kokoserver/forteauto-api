@@ -7,7 +7,7 @@ def get_db_url():
     if base_config.settings.environment == "test" or "testing":
         test_db_url =  f"sqlite:///testing.sqlite"
         return test_db_url
-    else:
+    elif base_config.settings.environment == "production":
         database_url = f"postgresql://{base_config.settings.database_username}:{base_config.settings.database_password}@{base_config.settings.database_host}:{base_config.settings.database_port}/{base_config.settings.database_name}"
         return database_url
 
