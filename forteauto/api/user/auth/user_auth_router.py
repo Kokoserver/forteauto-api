@@ -58,3 +58,10 @@ async def auth_login_token_refresh(
         data={"id": check_user.id})
     return user_auth_schema.TokenData(
         access_token=access_token, refresh_token=refresh_token)
+
+
+
+@router.post('/find-user')
+async def check_email():
+    pass
+    
