@@ -2,7 +2,7 @@ import warnings
 import pytest
 from fastapi.testclient import TestClient
 from fastapi import status
-from fortauto.api.payment.payment_schema import PaymentInput, ValidatePaymet_Input, RefundInput
+from forteauto.api.payment.payment_schema import PaymentInput, ValidatePaymet_Input, RefundInput
 
 @pytest.fixture
 @pytest.mark.asyncio

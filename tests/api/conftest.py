@@ -1,14 +1,14 @@
 import pytest
 from fastapi.testclient import TestClient
-from fortauto.core.jwt_anth import JWTAUTH
-from fortauto.database import database_dependencies
-from fortauto.api.user import user_model
+from forteauto.core.jwt_anth import JWTAUTH
+from forteauto.database import database_dependencies
+from forteauto.api.user import user_model
 
-from fortauto.api.user.address.user_address_model import Address
-from fortauto.api.user.property.user_property_model import Car
-from fortauto.database import database_dependencies
-from fortauto.api.service.listing.service_listing_model import Service_type
-from fortauto.api.service.service_model import Service
+from forteauto.api.user.address.user_address_model import Address
+from forteauto.api.user.property.user_property_model import Car
+from forteauto.database import database_dependencies
+from forteauto.api.service.listing.service_listing_model import Service_type
+from forteauto.api.service.service_model import Service
 
 @pytest.fixture
 def get_user_data_map():

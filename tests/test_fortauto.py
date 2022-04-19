@@ -1,4 +1,4 @@
-from fortauto import __version__
+from forteauto import __version__
 from fastapi import status
 
 def test_version():
