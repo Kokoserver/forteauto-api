@@ -4,7 +4,7 @@ import sqlalchemy
 from forteauto.conf import config as base_config
 
 def get_db_url():
-    if base_config.settings.environment == "test" or base_config.settings.environment == "testing":
+    if base_config.settings.environment in  ("testing", "test"):
         test_db_url =  f"sqlite:///testing.sqlite"
         return test_db_url
     elif base_config.settings.environment == "production" and not base_config.settings.debug:
